@@ -1,0 +1,83 @@
+/** Add css rules here for your application. */
+
+
+/** Example rules used by the template application (remove for your app) */
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+    color: #777777;
+    margin: 40px 0px 70px;
+    text-align: center;
+}
+
+.invalid{
+    color: red;
+}
+
+.valid{
+    color: green;
+}
+
+.header {
+    background-color: #2062B8;
+    font-style: italic;
+}
+
+.list {
+    border: 1px solid silver;
+    padding: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
+.paginationPanel{
+    padding: 3px 5px;
+    border: 1px #ccc;
+    border-top-style: outset;
+    border-right-style: outset;
+    border-bottom-style: outset;
+    background: lightblue;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
+.paginationPanel{
+    border-left-style: outset;
+}
+
+.addPanel {
+    alignment: center;
+    text-align: center;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
+.pageButton {
+    margin-left: 5px;
+}
+
+.pageButton:hover {
+    background: yellow;
+}
+
+.selectedButton {
+    background: orange;
+    color: white;
+}
+
+.column{
+    width: 100%;
+    padding: 3px 5px;
+    border: 1px outset #ccc;
+    background: yellow;
+    color: black;
+}
+
+.sortByColumn{
+    background: orange;
+    color: white;
+}
+
+.dialogVPanel {
+    margin: 5px;
+}
