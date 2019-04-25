@@ -1,7 +1,6 @@
 package client;
 
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.ui.*;
 import shared.Book;
 
@@ -22,6 +21,7 @@ public class BookEditor extends DialogBox {
     private TextBox titleTextBox;
     private TextBox pageNumTextBox;
     private TextBox publishingYearTextBox;
+    private PopupPanel hint = new PopupPanel();
 
 
     public BookEditor(Book book) {
@@ -31,29 +31,38 @@ public class BookEditor extends DialogBox {
         // Enable animation.
         setAnimationEnabled(true);
         id = book.getId();
+        hint.setWidget(new Label("Incorrect input"));
         Label authorLabel = new Label("Author Name:");
         authorTextBox = new TextBox();
         if(id != -1)
             authorTextBox.setText(book.getAuthor());
         authorTextBox.addKeyUpHandler(new MyKeyUpHandler());
+        authorTextBox.addMouseOverHandler(new MyMouseOverHandler());
+        authorTextBox.addMouseOutHandler(new MyMouseOutHandler());
         //authorTextBox.addStyleName("invalid");
         Label titleLabel = new Label("Title:");
         titleTextBox = new TextBox();
         if(id != -1)
             titleTextBox.setText(book.getTitle());
         titleTextBox.addKeyUpHandler(new MyKeyUpHandler());
+        titleTextBox.addMouseOverHandler(new MyMouseOverHandler());
+        titleTextBox.addMouseOutHandler(new MyMouseOutHandler());
         //titleTextBox.addStyleName("invalid");
         Label pagesCountLabel = new Label("Pages Count:");
         pageNumTextBox = new TextBox();
         if(id != -1)
             pageNumTextBox.setText(String.valueOf(book.getPageNum()));
         pageNumTextBox.addKeyUpHandler(new MyKeyUpHandler());
+        pageNumTextBox.addMouseOverHandler(new MyMouseOverHandler());
+        pageNumTextBox.addMouseOutHandler(new MyMouseOutHandler());
         //pageNumTextBox.addStyleName("invalid");
         Label publishedYearLabel = new Label("Published Year:");
         publishingYearTextBox = new TextBox();
         if(id != -1)
             publishingYearTextBox.setText(String.valueOf(book.getPublishingYear()));
         publishingYearTextBox.addKeyUpHandler(new MyKeyUpHandler());
+        publishingYearTextBox.addMouseOverHandler(new MyMouseOverHandler());
+        publishingYearTextBox.addMouseOutHandler(new MyMouseOutHandler());
         //publishingYearTextBox.addStyleName("invalid");
         // DialogBox is a SimplePanel, so you have to set its widget
         // property to whatever you want its contents to be.
@@ -192,6 +201,7 @@ public class BookEditor extends DialogBox {
 
             boolean isValid = true;
             if (!author.equals("") && checkString(author)) {
+                authorTextBox.removeStyleName("invalid");
                 authorTextBox.addStyleName("valid");
             } else {
                 isValid = false;
@@ -201,6 +211,7 @@ public class BookEditor extends DialogBox {
             }
 
             if (!title.equals("") && checkString(title)) {
+                titleTextBox.removeStyleName("invalid");
                 titleTextBox.addStyleName("valid");
             } else {
                 isValid = false;
@@ -229,9 +240,30 @@ public class BookEditor extends DialogBox {
                 publishingYearTextBox.addStyleName("invalid");
             }
 
-            if (isValid) {
-                ok.setEnabled(true);
+            ok.setEnabled(isValid);
+        }
+    }
+
+    public class MyMouseOverHandler implements MouseOverHandler {
+
+        @Override
+        public void onMouseOver(MouseOverEvent mouseOverEvent) {
+            TextBox tb = (TextBox)mouseOverEvent.getSource();
+            hint.setPopupPosition(tb.getAbsoluteLeft(), tb.getAbsoluteTop()+tb.getOffsetHeight());
+            if(tb.getStyleName().contains("invalid")) {
+                hint.setVisible(true);
+            } else {
+                hint.setVisible(false);
             }
+            hint.show();
+        }
+    }
+
+    public class MyMouseOutHandler implements MouseOutHandler {
+
+        @Override
+        public void onMouseOut(MouseOutEvent mouseOutEvent) {
+            hint.hide();
         }
     }
 }
