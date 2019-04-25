@@ -18,11 +18,11 @@ public class BookService {
     }
 
     @POST
-    @Path("/add/{page}/{booksNum}/{sorting}")
+    @Path("/add/{booksNum}/{sorting}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public BookPagination addBook(@PathParam("page") int page, @PathParam("booksNum") int booksNum, @PathParam("sorting") String sorting, Book book) {
-        return bookModel.addBook(book, page, booksNum, sorting);
+    public BookPagination addBook(@PathParam("booksNum") int booksNum, @PathParam("sorting") String sorting, Book book) {
+        return bookModel.addBook(book, booksNum, sorting);
     }
 
     @POST

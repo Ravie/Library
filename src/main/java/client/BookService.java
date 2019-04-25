@@ -16,9 +16,9 @@ public interface BookService extends RestService {
     void getAllBooks(@PathParam("page") int page, @PathParam("booksNum") int booksNum, @PathParam("sorting") String sorting, MethodCallback<BookPagination> callback);
 
     @POST
-    @Path("/add/{page}/{booksNum}/{sorting}")
+    @Path("/add/{booksNum}/{sorting}")
     @Produces(MediaType.APPLICATION_JSON)
-    void addBook(@PathParam("page") int page, @PathParam("booksNum") int booksNum, @PathParam("sorting") String sorting, Book book, MethodCallback<BookPagination> callback);
+    void addBook(@PathParam("booksNum") int booksNum, @PathParam("sorting") String sorting, Book book, MethodCallback<BookPagination> callback);
 
     @POST
     @Path("/edit/{page}/{booksNum}/{sorting}")

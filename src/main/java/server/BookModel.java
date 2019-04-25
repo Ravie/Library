@@ -35,13 +35,16 @@ public class BookModel {
         return sortPage(books, page, booksNum, sorting);
     }
 
-    public BookPagination addBook(Book book, int page, int booksNum, String sorting) {
+    public BookPagination addBook(Book book, int booksNum, String sorting) {
         List<Book> books = readFromFile();
         size++;
         book.setId(size);
         books.add(book);
         writeToFile(books);
-        return sortPage(books, page, booksNum, sorting);
+        int curPage = searchPage(book, booksNum, sorting);
+        BookPagination bp = sortPage(books, curPage, booksNum, sorting);
+        bp.setCurrentPage(curPage);
+        return bp;
     }
 
     public BookPagination deleteBook(int id, int page, int booksNum, String sorting) {
@@ -64,6 +67,18 @@ public class BookModel {
             }
         writeToFile(books);
         return sortPage(books, page, booksNum, sorting);
+    }
+
+    private Integer searchPage(Book book, int booksNum, String sorting) {
+        List<Book> library = getAllBooks(1, -1, sorting).getBooks();
+        int page = 0;
+        for (int curPage = 1; curPage * booksNum <= library.size(); curPage++) {
+            List<Book>  booksOnPage = library.subList((curPage - 1) * booksNum, curPage * booksNum);
+            for(Book bookOnPage : booksOnPage)
+                if(bookOnPage.getId()==book.getId())
+                    page = curPage;
+        }
+        return page;
     }
 
     public BookPagination sortPage(List<Book> books, int page, int booksNum, String sorting) {

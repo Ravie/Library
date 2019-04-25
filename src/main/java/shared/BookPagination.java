@@ -6,6 +6,7 @@ public class BookPagination {
 
     private List<Book> books;
     private int size;
+    private int currentPage;
 
     public BookPagination() {
     }
@@ -13,6 +14,14 @@ public class BookPagination {
     public BookPagination(List<Book> books, int size) {
         this.books = books;
         this.size = size;
+    }
+
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
     }
 
     public List<Book> getBooks() {
