@@ -63,15 +63,15 @@ public class Library implements EntryPoint, DialogBoxAction {
 
         show3.addClickHandler(clickEvent -> {
             booksNum = 3;
-            service.getAllBooks(selectedPage, booksNum, sorting, new PagingMethodCallBack());
+            service.getAllBooks(1, booksNum, sorting, new PagingMethodCallBack());
         });
         show10.addClickHandler(clickEvent -> {
             booksNum = 10;
-            service.getAllBooks(selectedPage, booksNum, sorting, new PagingMethodCallBack());
+            service.getAllBooks(1, booksNum, sorting, new PagingMethodCallBack());
         });
         showAll.addClickHandler(clickEvent -> {
             booksNum = -1;
-            service.getAllBooks(selectedPage, booksNum, sorting, new PagingMethodCallBack());
+            service.getAllBooks(1, booksNum, sorting, new PagingMethodCallBack());
         });
 
         RootPanel.get("library").add(mainPanel);
