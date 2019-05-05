@@ -78,13 +78,18 @@ public class BookModel {
 
     private Integer searchPage(Book book, int booksNum, String sorting) {
         List<Book> library = getAllBooks(1, -1, sorting).getBooks();
-        int page = 0;
+        int page = 1, lastPage = 0;
         for (int curPage = 1; curPage * booksNum <= library.size(); curPage++) {
             List<Book>  booksOnPage = library.subList((curPage - 1) * booksNum, curPage * booksNum);
             for(Book bookOnPage : booksOnPage)
                 if(bookOnPage.getId()==book.getId())
                     page = curPage;
+            lastPage = curPage;
         }
+        List<Book>  booksOnPage = library.subList(lastPage * booksNum, library.size());
+        for(Book bookOnPage : booksOnPage)
+            if(bookOnPage.getId()==book.getId())
+                page = lastPage + 1;
         return page;
     }
 
