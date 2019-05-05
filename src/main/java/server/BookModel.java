@@ -37,12 +37,15 @@ public class BookModel {
 
     public BookPagination addBook(Book book, int booksNum, String sorting) {
         List<Book> books = readFromFile();
+        BookPagination bp = new BookPagination();
         size++;
         book.setId(size);
         books.add(book);
         writeToFile(books);
-        int curPage = searchPage(book, booksNum, sorting);
-        BookPagination bp = sortPage(books, curPage, booksNum, sorting);
+        int curPage = 1;
+        if (booksNum != -1)
+            curPage = searchPage(book, booksNum, sorting);
+        bp = sortPage(books, curPage, booksNum, sorting);
         bp.setCurrentPage(curPage);
         return bp;
     }
