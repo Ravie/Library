@@ -280,7 +280,10 @@ public class Library implements EntryPoint, DialogBoxAction {
                 @Override
                 public void onSuccess(Method method, BookPagination bookPagination) {
                     selectedPage = bookPagination.getCurrentPage();
-                    drawTable(bookPagination);
+                    if (selectedPage == -1)
+                        Window.alert("This book already in library!");
+                    else
+                        drawTable(bookPagination);
                 }
             });
         } else {

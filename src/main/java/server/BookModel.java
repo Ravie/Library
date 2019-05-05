@@ -38,6 +38,10 @@ public class BookModel {
     public BookPagination addBook(Book book, int booksNum, String sorting) {
         List<Book> books = readFromFile();
         BookPagination bp = new BookPagination();
+        if (books.contains(book)) {
+            bp.setCurrentPage(-1);
+            return bp;
+        }
         size++;
         book.setId(size);
         books.add(book);
