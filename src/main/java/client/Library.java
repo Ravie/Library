@@ -270,7 +270,7 @@ public class Library implements EntryPoint, DialogBoxAction {
 
     @Override
     public void applyChanges(int action) {
-        if(action == -1) {
+        if (action == -1) {
             service.addBook(booksNum, sorting, new Book(dialogBox.getAuthor(), dialogBox.getTitle(), dialogBox.getPageNum(), dialogBox.getPublishingYear(), new Date().getYear() + 1900, new Date().getMonth() + 1, new Date().getDate()), new MethodCallback<BookPagination>() {
                 @Override
                 public void onFailure(Method method, Throwable throwable) {

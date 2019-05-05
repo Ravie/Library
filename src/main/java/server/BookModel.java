@@ -69,7 +69,7 @@ public class BookModel {
         List<Book> books = readFromFile();
         for (Book book : books)
             if (book.getId() == newBook.getId()) {
-                books.set(books.indexOf(book),newBook);
+                books.set(books.indexOf(book), newBook);
                 break;
             }
         writeToFile(books);
@@ -80,15 +80,15 @@ public class BookModel {
         List<Book> library = getAllBooks(1, -1, sorting).getBooks();
         int page = 1, lastPage = 0;
         for (int curPage = 1; curPage * booksNum <= library.size(); curPage++) {
-            List<Book>  booksOnPage = library.subList((curPage - 1) * booksNum, curPage * booksNum);
-            for(Book bookOnPage : booksOnPage)
-                if(bookOnPage.getId()==book.getId())
+            List<Book> booksOnPage = library.subList((curPage - 1) * booksNum, curPage * booksNum);
+            for (Book bookOnPage : booksOnPage)
+                if (bookOnPage.getId() == book.getId())
                     page = curPage;
             lastPage = curPage;
         }
-        List<Book>  booksOnPage = library.subList(lastPage * booksNum, library.size());
-        for(Book bookOnPage : booksOnPage)
-            if(bookOnPage.getId()==book.getId())
+        List<Book> booksOnPage = library.subList(lastPage * booksNum, library.size());
+        for (Book bookOnPage : booksOnPage)
+            if (bookOnPage.getId() == book.getId())
                 page = lastPage + 1;
         return page;
     }
