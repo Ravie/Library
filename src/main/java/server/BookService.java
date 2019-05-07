@@ -29,7 +29,7 @@ public class BookService {
     @Path("/edit/{page}/{booksNum}/{sorting}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public BookPagination editBook(@PathParam("page") int page, @PathParam("booksNum") int booksNum, @PathParam("sorting") String sorting, Book book){
+    public BookPagination editBook(@PathParam("page") int page, @PathParam("booksNum") int booksNum, @PathParam("sorting") String sorting, Book book) {
         return bookModel.editBook(book, page, booksNum, sorting);
     }
 

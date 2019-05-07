@@ -34,7 +34,7 @@ public class BookEditor extends DialogBox {
         hint.setWidget(new Label("Incorrect input"));
         Label authorLabel = new Label("Author Name:");
         authorTextBox = new TextBox();
-        if(id != -1)
+        if (id != -1)
             authorTextBox.setText(book.getAuthor());
         authorTextBox.addKeyUpHandler(new MyKeyUpHandler());
         authorTextBox.addMouseOverHandler(new MyMouseOverHandler());
@@ -42,7 +42,7 @@ public class BookEditor extends DialogBox {
         //authorTextBox.addStyleName("invalid");
         Label titleLabel = new Label("Title:");
         titleTextBox = new TextBox();
-        if(id != -1)
+        if (id != -1)
             titleTextBox.setText(book.getTitle());
         titleTextBox.addKeyUpHandler(new MyKeyUpHandler());
         titleTextBox.addMouseOverHandler(new MyMouseOverHandler());
@@ -50,7 +50,7 @@ public class BookEditor extends DialogBox {
         //titleTextBox.addStyleName("invalid");
         Label pagesCountLabel = new Label("Pages Count:");
         pageNumTextBox = new TextBox();
-        if(id != -1)
+        if (id != -1)
             pageNumTextBox.setText(String.valueOf(book.getPageNum()));
         pageNumTextBox.addKeyUpHandler(new MyKeyUpHandler());
         pageNumTextBox.addMouseOverHandler(new MyMouseOverHandler());
@@ -58,7 +58,7 @@ public class BookEditor extends DialogBox {
         //pageNumTextBox.addStyleName("invalid");
         Label publishedYearLabel = new Label("Published Year:");
         publishingYearTextBox = new TextBox();
-        if(id != -1)
+        if (id != -1)
             publishingYearTextBox.setText(String.valueOf(book.getPublishingYear()));
         publishingYearTextBox.addKeyUpHandler(new MyKeyUpHandler());
         publishingYearTextBox.addMouseOverHandler(new MyMouseOverHandler());
@@ -248,9 +248,9 @@ public class BookEditor extends DialogBox {
 
         @Override
         public void onMouseOver(MouseOverEvent mouseOverEvent) {
-            TextBox tb = (TextBox)mouseOverEvent.getSource();
-            hint.setPopupPosition(tb.getAbsoluteLeft(), tb.getAbsoluteTop()+tb.getOffsetHeight());
-            if(tb.getStyleName().contains("invalid")) {
+            TextBox tb = (TextBox) mouseOverEvent.getSource();
+            hint.setPopupPosition(tb.getAbsoluteLeft(), tb.getAbsoluteTop() + tb.getOffsetHeight());
+            if (tb.getStyleName().contains("invalid")) {
                 hint.setVisible(true);
             } else {
                 hint.setVisible(false);

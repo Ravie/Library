@@ -63,15 +63,18 @@ public class Library implements EntryPoint, DialogBoxAction {
 
         show3.addClickHandler(clickEvent -> {
             booksNum = 3;
-            service.getAllBooks(1, booksNum, sorting, new PagingMethodCallBack());
+            selectedPage = 1;
+            service.getAllBooks(selectedPage, booksNum, sorting, new PagingMethodCallBack());
         });
         show10.addClickHandler(clickEvent -> {
             booksNum = 10;
-            service.getAllBooks(1, booksNum, sorting, new PagingMethodCallBack());
+            selectedPage = 1;
+            service.getAllBooks(selectedPage, booksNum, sorting, new PagingMethodCallBack());
         });
         showAll.addClickHandler(clickEvent -> {
             booksNum = -1;
-            service.getAllBooks(1, booksNum, sorting, new PagingMethodCallBack());
+            selectedPage = 1;
+            service.getAllBooks(selectedPage, booksNum, sorting, new PagingMethodCallBack());
         });
 
         RootPanel.get("library").add(mainPanel);
@@ -267,7 +270,7 @@ public class Library implements EntryPoint, DialogBoxAction {
 
     @Override
     public void applyChanges(int action) {
-        if(action == -1) {
+        if (action == -1) {
             service.addBook(booksNum, sorting, new Book(dialogBox.getAuthor(), dialogBox.getTitle(), dialogBox.getPageNum(), dialogBox.getPublishingYear(), new Date().getYear() + 1900, new Date().getMonth() + 1, new Date().getDate()), new MethodCallback<BookPagination>() {
                 @Override
                 public void onFailure(Method method, Throwable throwable) {
@@ -277,7 +280,10 @@ public class Library implements EntryPoint, DialogBoxAction {
                 @Override
                 public void onSuccess(Method method, BookPagination bookPagination) {
                     selectedPage = bookPagination.getCurrentPage();
-                    drawTable(bookPagination);
+                    if (selectedPage == -1)
+                        Window.alert("This book already in library!");
+                    else
+                        drawTable(bookPagination);
                 }
             });
         } else {

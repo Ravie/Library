@@ -106,19 +106,15 @@ public class Book {
         if (this == o) return true;
         if (!(o instanceof Book)) return false;
         Book book = (Book) o;
-        return getId() == book.getId() &&
-                getPageNum() == book.getPageNum() &&
+        return getPageNum() == book.getPageNum() &&
                 getPublishingYear() == book.getPublishingYear() &&
-                getAddedYear() == book.getAddedYear() &&
-                getAddedMonth() == book.getAddedMonth() &&
-                getAddedDay() == book.getAddedDay() &&
                 Objects.equals(getAuthor(), book.getAuthor()) &&
                 Objects.equals(getTitle(), book.getTitle());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getAuthor(), getTitle(), getPageNum(), getPublishingYear(), getAddedYear(), getAddedMonth(), getAddedDay());
+        return Objects.hash(getAuthor(), getTitle(), getPageNum(), getPublishingYear());
     }
 
     @Override

@@ -37,12 +37,19 @@ public class BookModel {
 
     public BookPagination addBook(Book book, int booksNum, String sorting) {
         List<Book> books = readFromFile();
+        BookPagination bp = new BookPagination();
+        if (books.contains(book)) {
+            bp.setCurrentPage(-1);
+            return bp;
+        }
         size++;
         book.setId(size);
         books.add(book);
         writeToFile(books);
-        int curPage = searchPage(book, booksNum, sorting);
-        BookPagination bp = sortPage(books, curPage, booksNum, sorting);
+        int curPage = 1;
+        if (booksNum != -1)
+            curPage = searchPage(book, booksNum, sorting);
+        bp = sortPage(books, curPage, booksNum, sorting);
         bp.setCurrentPage(curPage);
         return bp;
     }
@@ -62,7 +69,7 @@ public class BookModel {
         List<Book> books = readFromFile();
         for (Book book : books)
             if (book.getId() == newBook.getId()) {
-                books.set(books.indexOf(book),newBook);
+                books.set(books.indexOf(book), newBook);
                 break;
             }
         writeToFile(books);
@@ -71,13 +78,18 @@ public class BookModel {
 
     private Integer searchPage(Book book, int booksNum, String sorting) {
         List<Book> library = getAllBooks(1, -1, sorting).getBooks();
-        int page = 0;
+        int page = 1, lastPage = 0;
         for (int curPage = 1; curPage * booksNum <= library.size(); curPage++) {
-            List<Book>  booksOnPage = library.subList((curPage - 1) * booksNum, curPage * booksNum);
-            for(Book bookOnPage : booksOnPage)
-                if(bookOnPage.getId()==book.getId())
+            List<Book> booksOnPage = library.subList((curPage - 1) * booksNum, curPage * booksNum);
+            for (Book bookOnPage : booksOnPage)
+                if (bookOnPage.getId() == book.getId())
                     page = curPage;
+            lastPage = curPage;
         }
+        List<Book> booksOnPage = library.subList(lastPage * booksNum, library.size());
+        for (Book bookOnPage : booksOnPage)
+            if (bookOnPage.getId() == book.getId())
+                page = lastPage + 1;
         return page;
     }
 
